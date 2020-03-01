@@ -1,0 +1,48 @@
+[{
+    "isDark": true,
+    "styleName": "dark-deep-purple-theme",
+    "displayName": "Deep Purple Dark",
+    "primary": "deep-purple",
+    "accent": "brown",
+    "warn": "deep-orange"
+},
+{
+    "isDark": true,
+    "styleName": "dark-indigo-theme",
+    "displayName": "Indigo Dark",
+    "primary": "indigo",
+    "accent": "teal",
+    "warn": "red"
+},
+{
+    "isDark": true,
+    "styleName": "dark-deep-orange-theme",
+    "displayName": "Deep Orange Dark",
+    "primary": "deep-orange",
+    "accent": "light-blue",
+    "warn": "pink"
+},
+{
+    "isDark": false,
+    "styleName": "light-deep-purple-theme",
+    "displayName": "Deep Purple Light",
+    "primary": "deep-purple",
+    "accent": "brown",
+    "warn": "deep-orange"
+},
+{
+    "isDark": false,
+    "styleName": "light-indigo-theme",
+    "displayName": "Indigo Light",
+    "primary": "indigo",
+    "accent": "teal",
+    "warn": "red"
+},
+{
+    "isDark": false,
+    "styleName": "light-deep-orange-theme",
+    "displayName": "Deep Orange Light",
+    "primary": "deep-orange",
+    "accent": "light-blue",
+    "warn": "pink"
+}]

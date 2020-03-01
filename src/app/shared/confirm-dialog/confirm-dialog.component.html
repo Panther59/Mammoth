@@ -1,0 +1,15 @@
+<div>
+  <h2 mat-dialog-title>{{title}}</h2>
+  <hr>
+  <mat-dialog-content>
+      <div class="modal-body">
+          <p>{{message}}</p>
+      </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+      <div class="modal-footer">
+          <button mat-raised-button color="primary"  (click)="yes()">Yes</button>
+          <button mat-raised-button color="accent" (click)="no()">No</button>
+      </div>
+  </mat-dialog-actions>
+</div>

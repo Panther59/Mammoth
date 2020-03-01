@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+@import 'common.scss';
+
+$toolbar-breakpoint: 600px;
+$fa-font-path: '../../node_modules/font-awesome/fonts';
+
+
+@import '../../node_modules/@angular/material/theming';
+
+@include mat-core();
+@import "../../node_modules/font-awesome/scss/font-awesome.scss";
+
+@import 'dark-deep-orange-theme.scss';
+@import 'dark-deep-purple-theme.scss';
+@import 'dark-indigo-theme.scss';
+@import 'light-deep-orange-theme.scss';
+@import 'light-deep-purple-theme.scss';
+@import 'light-indigo-theme.scss';
+
+@import '../app/app.component.scss';
+@import '../app/shared/theme-dialog/theme-dialog.component.scss';
+
+$custom-typography: mat-typography-config( 
+    $font-family: 'Ubuntu, Roboto, "Helvetica Neue"', 
+$subheading-2: mat-typography-level(18px, 28px, 400), 
+$subheading-1: mat-typography-level(17px, 24px, 400), 
+$body-2: mat-typography-level(15px, 24px, 500), 
+$body-1: mat-typography-level(15px, 20px, 400), 
+$caption: mat-typography-level(14px, 20px, 400), 
+$button: mat-typography-level(16px, 14px, 500));
+
+@include angular-material-typography($custom-typography);
+
+@mixin custom-components-theme($theme) {
+    @include my-app-component-theme($theme);
+    @include my-app-theme-dialog-theme($theme);
+}
+
+@include angular-material-theme($dark-deep-purple-theme);
+@include custom-components-theme($dark-deep-purple-theme);
+
+.dark-deep-orange-theme {
+    @include angular-material-theme($dark-deep-orange-theme);
+    @include custom-components-theme($dark-deep-orange-theme);
+}
+
+.dark-deep-purple-theme {
+    @include angular-material-theme($dark-deep-purple-theme);
+    @include custom-components-theme($dark-deep-purple-theme);
+}
+
+.dark-indigo-theme {
+    @include angular-material-theme($dark-indigo-theme);
+    @include custom-components-theme($dark-indigo-theme);
+}
+
+.light-deep-orange-theme {
+    @include angular-material-theme($light-deep-orange-theme);
+    @include custom-components-theme($light-deep-orange-theme);
+}
+
+.light-deep-purple-theme {
+    @include angular-material-theme($light-deep-purple-theme);
+    @include custom-components-theme($light-deep-purple-theme);
+}
+
+.light-indigo-theme {
+    @include angular-material-theme($light-indigo-theme);
+    @include custom-components-theme($light-indigo-theme);
+}

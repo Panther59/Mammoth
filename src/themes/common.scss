@@ -1,0 +1,417 @@
+﻿html, body {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    font-family: sans-serif;
+    line-height: 1.15;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -ms-overflow-style: scrollbar;
+    -webkit-tap-highlight-color: transparent;
+    height: 100%;
+}
+
+@-ms-viewport {
+    width: device-width;
+}
+
+body {
+    margin: 0;
+    font-family: "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-y: scroll;
+    min-height: 100%;
+    height: 100%;
+}
+
+app-root {
+    display: block;
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+ol,
+ul,
+dl {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+    margin-bottom: 0;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+    margin-bottom: 0.5rem;
+    font-family: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    color: inherit;
+}
+
+h1, .h1 {
+    font-size: 2.5rem;
+}
+
+h2, .h2 {
+    font-size: 2rem;
+}
+
+h3, .h3 {
+    font-size: 1.75rem;
+}
+
+h4, .h4 {
+    font-size: 1.5rem;
+}
+
+h5, .h5 {
+    font-size: 1.25rem;
+}
+
+h6, .h6 {
+    font-size: 1rem;
+}
+
+button {
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    -webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+
+/* For Firefox */
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+/* Webkit browsers like Safari and Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.toolbarMenus {
+    visibility: visible;
+}
+
+.sideBarToggler {
+    visibility: collapse;
+}
+
+.toolBarBrand {
+    width: auto;
+}
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+// global styles
+.mat-dialog-container {
+    max-width: 1080px;
+}
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+
+    .container {
+        max-width: 1080px;
+    }
+
+    .toolbarMenus {
+        visibility: visible;
+    }
+
+    .sideBarToggler {
+        visibility: collapse;
+    }
+
+    .toolBarBrand {
+        width: auto;
+    }
+
+
+    // global styles
+    .mat-dialog-container {
+        max-width: 1080px;
+    }
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+
+    .container {
+        max-width: 960px;
+    }
+
+    .toolbarMenus {
+        visibility: visible;
+    }
+
+    .sideBarToggler {
+        visibility: collapse;
+    }
+
+    .toolBarBrand {
+        width: auto;
+    }
+
+
+    // global styles
+    .mat-dialog-container {
+        max-width: 960px;
+    }
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+
+
+    .container {
+        max-width: 760px;
+    }
+
+    .toolbarMenus {
+        visibility: collapse;
+    }
+
+    .sideBarToggler {
+        visibility: visible;
+    }
+
+    .toolBarBrand {
+        width: 100%;
+        text-align: center;
+    }
+
+
+    // global styles
+    .mat-dialog-container {
+        max-width: 760px;
+    }
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+
+    .container {
+        max-width: 95%;
+    }
+
+
+    .toolbarMenus {
+        visibility: collapse;
+    }
+
+    .sideBarToggler {
+        visibility: visible;
+    }
+
+    .toolBarBrand {
+        width: 100%;
+        text-align: center;
+    }
+
+    // global styles
+    .mat-dialog-container {
+        max-width: 90%;
+    }
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    .container {
+        max-width: 100%;
+    }
+
+    .toolbarMenus {
+        visibility: collapse;
+    }
+
+    .sideBarToggler {
+        visibility: visible;
+    }
+
+    .toolBarBrand {
+        width: 100%;
+        text-align: center;
+    }
+
+
+    .mat-dialog-container {
+        max-width: 100%;
+    }
+}
+/*@media (min-width: 576px) {
+    .container {
+        max-width: 540px;
+    }
+
+    .toolbarMenus {
+        visibility: visible;
+    }
+
+    .sideBarToggler {
+        visibility: collapse;
+    }
+
+    .toolBarBrand {
+        width: auto;
+    }
+
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: 720px;
+    }
+
+
+    .toolbarMenus {
+        visibility: visible;
+    }
+
+    .sideBarToggler {
+        visibility: collapse;
+    }
+
+    .toolBarBrand {
+        width: auto;
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+
+    .toolbarMenus {
+        visibility: visible;
+    }
+
+    .sideBarToggler {
+        visibility: collapse;
+    }
+
+    .toolBarBrand {
+        width: auto;
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}*/
+
+.fillRemainingSpace {
+    /* This fills the remaining space, by using flexbox. 
+     Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+}
+
+mat-icon {
+    font-family: 'Material Icons' !important;
+}
+
+@-webkit-keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes load8 {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
+
+@-webkit-keyframes load9 {
+    0% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes load9 {
+    0% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+}
+
+.under {
+    position: absolute;
+}
+
+.over {
+    position: absolute;
+    z-index: -1;
+}
+
+.marginBottom-0 {
+    margin-bottom: 0;
+}
+
+mat-sidenav,
+mat-sidenav.mat-locked-open,
+mat-sidenav.mat-closed.mat-locked-open-add-active {
+    min-width: 200px !important;
+    width: auto !important;
+    max-width: 400px !important;
+}

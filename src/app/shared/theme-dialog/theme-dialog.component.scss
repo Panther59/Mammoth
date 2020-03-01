@@ -1,0 +1,64 @@
+@mixin my-app-theme-dialog-theme($theme) {
+  $red: mat-palette($mat-red);
+  $indigo: mat-palette($mat-indigo);
+  $deep-purple: mat-palette($mat-deep-purple);
+  $brown: mat-palette($mat-brown);
+  $deep-orange: mat-palette($mat-deep-orange);
+  $teal: mat-palette($mat-teal);
+  $pink: mat-palette($mat-pink);
+  $light-blue: mat-palette($mat-light-blue);
+  .dark {
+    background-color: mat-color($mat-dark-theme-background, background) !important;
+    color: mat-color($mat-dark-theme-foreground, base) !important;
+  }
+  .light {
+    background-color: mat-color($mat-light-theme-background, background) !important;
+    color: mat-color($mat-light-theme-foreground, base) !important;
+  }
+  .red {
+    background-color: mat-color($red, default) !important;
+    color: mat-color($red, default-contrast) !important;
+  }
+  .brown {
+    background-color: mat-color($brown, default) !important;
+    color: mat-color($brown, default-contrast) !important;
+  }
+  .teal {
+    background-color: mat-color($teal, default) !important;
+    color: mat-color($teal, default-contrast) !important;
+  }
+  .pink {
+    background-color: mat-color($pink, default) !important;
+    color: mat-color($pink, default-contrast) !important;
+  }
+  .deep-orange {
+    background-color: mat-color($deep-orange, default) !important;
+    color: mat-color($deep-orange, default-contrast) !important;
+  }
+  .deep-purple {
+    background-color: mat-color($deep-purple, default) !important;
+    color: mat-color($deep-purple, default-contrast) !important;
+  }
+  .indigo {
+    background-color: mat-color($indigo, default) !important;
+    color: mat-color($indigo, default-contrast) !important;
+  }
+  .light-blue {
+    background-color: mat-color($light-blue, default) !important;
+    color: mat-color($light-blue, default-contrast) !important;
+  }
+  .themeCard {
+    margin: 10px;
+    padding: 5px;
+  }
+  .themeName {
+    width: 100px;
+  }
+  .themeColorButton {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .themeApplyButton {
+    margin-left: 30px;
+  }
+}

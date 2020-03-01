@@ -1,0 +1,15 @@
+@mixin my-app-component-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $bluegray: mat-palette($mat-blue-grey, 600, 200, 900);
+    $blue: mat-palette($mat-blue, 600, 200, 900);
+    $amber: mat-palette($mat-yellow, 600, 200, 900);
+    .ng-bar {
+        background-color: mat-color($warn);
+    };
+
+    .fullHeightDiv{
+        height: 100%;
+    }
+}

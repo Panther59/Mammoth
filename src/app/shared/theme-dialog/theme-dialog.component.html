@@ -1,0 +1,23 @@
+<div>
+  <h2 mat-dialog-title>Themes</h2>
+  <hr>
+  <mat-dialog-content>
+    <div class="modal-body modal-lg">
+      <div *ngFor="let theme of themes">
+        <mat-card [ngClass]="getThemeClassForCard(theme)">
+          <div >
+            <div>{{theme.displayName}}</div>
+            <button mat-raised-button [ngClass]="getThemeClassForButton(theme.primary)">Primary</button>
+            <button mat-raised-button [ngClass]="getThemeClassForButton(theme.accent)">Accent</button>
+            <button mat-raised-button [ngClass]="getThemeClassForButton(theme.warn)">Warn</button>
+            <button mat-raised-button class="themeApplyButton" color="primary" (click)="apply(theme)">Apply</button>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="modal-footer">
+      <button mat-raised-button color="accent" (click)="closePopup()">Close</button>
+    </div>
+  </mat-dialog-actions>
