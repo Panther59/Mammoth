@@ -16,7 +16,7 @@ import { StorageService } from './storage.service';
 export class AuthenticationService {
   @BlockUI() blockUI: NgBlockUI;
   timedOut = false;
-  baseUrl = 'https://localhost:7101/';
+  baseUrl = 'https://localhost:5001/';
   constructor(
     private httpClient: HttpClient,
     private storageService: StorageService,

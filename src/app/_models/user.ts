@@ -6,24 +6,5 @@
     lastName: string;
     email: string;
     phone: string;
-    token: string;
-    type: string;
-
-    isAdminUser(): boolean {
-        if (this.type == 'Administrator') {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    isSuperUser(): boolean {
-        if (this.type == 'Super User') {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
+    type: number;
 }
