@@ -33,12 +33,12 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     FormsModule,
     BrowserModule,
+    HttpClientModule,
     NgProgressModule,
     NgProgressHttpModule,
     NgIdleKeepaliveModule.forRoot(),
     BlockUIModule.forRoot(),
     BrowserAnimationsModule,
-    HttpClientModule,
     AppRoutingModule,
     SharedModule,
     MatButtonModule,
