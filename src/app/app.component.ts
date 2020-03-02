@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { routerTransition } from './_animations/router.transition.animation';
+import { AuthenticationService } from './_services/authentication.service';
 import { StorageService } from './_services/storage.service';
 import { ThemeDialogComponent } from './shared/theme-dialog/theme-dialog.component';
 
@@ -18,11 +19,12 @@ export class AppComponent {
   @HostBinding('class') componentCssClass;
   constructor(
     public overlayContainer: OverlayContainer,
+    public authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router,
     private storageService: StorageService,
     public dialog: MatDialog) {
-    this.selectTheme(this.storageService.theme)
+    this.selectTheme(this.storageService.theme);
   }
   selectTheme(theme: string = null) {
     let selectedTheme = 'dark-indigo-theme';
@@ -54,5 +56,11 @@ export class AppComponent {
     if (result) {
       this.selectTheme(result);
     }
+  }
+  logout(){
+    this.authenticationService.logout();
+  }
+  isLoggedIn(){
+    return this.storageService.token && this.storageService.currentUser;
   }
 }

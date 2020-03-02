@@ -10,7 +10,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { BlockUIModule } from 'ng-block-ui';
 
+import { AuthGuard } from './_guards/auth.guard';
+import { AuthenticationService } from './_services/authentication.service';
 import { FilesService } from './_services/files.services';
 import { MessageService } from './_services/message.service';
 import { StorageService } from './_services/storage.service';
@@ -25,6 +29,8 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     FormsModule,
     BrowserModule,
+    NgIdleKeepaliveModule.forRoot(),
+    BlockUIModule,
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
@@ -38,9 +44,21 @@ import { SharedModule } from './shared/shared.module';
     MatIconModule
   ],
   providers: [
+    AuthenticationService,
     StorageService,
     MessageService,
-    FilesService
+    FilesService,
+    AuthGuard,
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: JWTInterceptor,
+    //   multi: true,
+    // },
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: TokenInterceptor,
+    //   multi: true,
+    // },
   ],
   bootstrap: [AppComponent]
 })

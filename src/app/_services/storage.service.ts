@@ -4,6 +4,9 @@ import { Injectable } from '@angular/core';
 export class StorageService {
 
   private readonly themeKey = 'theme';
+  private readonly tokenKey = 'token';
+  private readonly userKey = 'currentUser';
+  private readonly userTypeKey = 'userType';
 
   get theme(): string {
     return this.getStorageString(this.themeKey);
@@ -11,6 +14,30 @@ export class StorageService {
 
   set theme(theme: string) {
     this.setStorageString(this.themeKey, theme);
+  }
+
+  get token(): string {
+    return this.getStorageString(this.tokenKey);
+  }
+
+  set token(token: string) {
+    this.setStorageString(this.tokenKey, token);
+  }
+
+  get currentUser(): string {
+    return this.getStorageString(this.userKey);
+  }
+
+  set currentUser(user: string) {
+    this.setStorageString(this.userKey, user);
+  }
+
+  get userType(): string {
+    return this.getStorageString(this.userTypeKey);
+  }
+
+  set userType(userType: string) {
+    this.setStorageString(this.userTypeKey, userType);
   }
 
   private getStorageData<T>(key: string) {

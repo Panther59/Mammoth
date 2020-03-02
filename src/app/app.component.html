@@ -112,6 +112,12 @@
               (click)="viewTheme();sidenav.close()">Themes</button>
           </span>
 
+          <span class="d-none d-md-inline" *ngIf="isLoggedIn()">
+            <button mat-menu-item
+              class="nav-button"
+              (click)="logout();sidenav.close()">Logout</button>
+          </span>
+
         </mat-menu>
       </span>
     </mat-toolbar>
