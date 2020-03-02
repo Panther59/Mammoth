@@ -12,12 +12,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { BlockUIModule } from 'ng-block-ui';
+import { NgProgressModule } from 'ngx-progressbar';
+import { NgProgressHttpModule } from 'ngx-progressbar/http';
 
 import { AuthGuard } from './_guards/auth.guard';
 import { TokenInterceptor } from './_interceptors/token.interceptor';
 import { AuthenticationService } from './_services/authentication.service';
 import { FilesService } from './_services/files.services';
 import { MessageService } from './_services/message.service';
+import { SalesService } from './_services/sales.service';
 import { StorageService } from './_services/storage.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -30,8 +33,10 @@ import { SharedModule } from './shared/shared.module';
   imports: [
     FormsModule,
     BrowserModule,
+    NgProgressModule,
+    NgProgressHttpModule,
     NgIdleKeepaliveModule.forRoot(),
-    BlockUIModule,
+    BlockUIModule.forRoot(),
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
@@ -47,6 +52,7 @@ import { SharedModule } from './shared/shared.module';
   providers: [
     AuthenticationService,
     StorageService,
+    SalesService,
     MessageService,
     FilesService,
     AuthGuard,

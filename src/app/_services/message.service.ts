@@ -1,4 +1,5 @@
-﻿import { Injectable } from '@angular/core';
+﻿import { HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
@@ -8,44 +9,54 @@ import { MessageDialogComponent } from '../shared/message-dialog/message-dialog.
 
 @Injectable()
 export class MessageService {
-    private subject = new Subject<any>();
-    constructor(
-        public dialog: MatDialog) { }
-    sendMessage(message: string) {
-        this.subject.next({ text: message });
+  private subject = new Subject<any>();
+  constructor(
+    public dialog: MatDialog) { }
+  sendMessage(message: string) {
+    this.subject.next({ text: message });
+  }
+
+  clearMessage() {
+    this.subject.next();
+  }
+
+  getMessage(): Observable<any> {
+    return this.subject.asObservable();
+  }
+
+  async showError(title: string, error: any, buttonText: string = null): Promise<void> {
+
+    let message = error.message;
+    if (error instanceof HttpErrorResponse) {
+      message = error.error.error;
     }
 
-    clearMessage() {
-        this.subject.next();
+    await this.showMessage(title, message, buttonText);
+  }
+
+  async showMessage(title: string, message: string, buttonText: string = null): Promise<void> {
+    const msgRef = this.dialog.open(MessageDialogComponent, {
+      data: {},
+      disableClose: true,
+      hasBackdrop: true
+    });
+    msgRef.componentInstance.title = title;
+    msgRef.componentInstance.message = message;
+    if (buttonText != null) {
+      msgRef.componentInstance.buttonText = buttonText;
     }
 
-    getMessage(): Observable<any> {
-        return this.subject.asObservable();
-    }
+    return await msgRef.afterClosed().toPromise();
+  }
 
-    async showMessage(title: string, message: string, buttonText: string = null): Promise<void> {
-        const msgRef = this.dialog.open(MessageDialogComponent, {
-            data: {},
-            disableClose: true,
-            hasBackdrop: true
-        });
-        msgRef.componentInstance.title = title;
-        msgRef.componentInstance.message = message;
-        if (buttonText != null) {
-            msgRef.componentInstance.buttonText = buttonText;
-        }
-
-        return await msgRef.afterClosed().toPromise();
-    }
-
-    async confirm(title: string, message: string): Promise<boolean> {
-        const msgRef = this.dialog.open(ConfirmDialogComponent, {
-            data: {},
-            disableClose: true,
-            hasBackdrop: true
-        });
-        msgRef.componentInstance.title = title;
-        msgRef.componentInstance.message = message;
-        return await msgRef.afterClosed().toPromise();
-    }
+  async confirm(title: string, message: string): Promise<boolean> {
+    const msgRef = this.dialog.open(ConfirmDialogComponent, {
+      data: {},
+      disableClose: true,
+      hasBackdrop: true
+    });
+    msgRef.componentInstance.title = title;
+    msgRef.componentInstance.message = message;
+    return await msgRef.afterClosed().toPromise();
+  }
 }

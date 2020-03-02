@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     private messageService: MessageService,
     private titleService: Title) {
     this.titleService.setTitle('Login | Mammoth');
+    this.model.type = this.storageService.loginUserType ?? 'Store';
   }
 
   ngOnInit() {
@@ -35,8 +36,15 @@ export class LoginComponent implements OnInit {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '';
   }
-
   async login() {
+    this.storageService.loginUserType = this.model.type;
+    if (this.model.type === 'User') {
+      await this.loginUser();
+    } else {
+      await this.loginStore();
+    }
+  }
+  async loginUser() {
     this.loading = true;
     this.blockUI.start('Validating...');
     try {
@@ -44,11 +52,9 @@ export class LoginComponent implements OnInit {
       req.loginName = this.model.username;
       req.password = this.model.password;
       const response = await this.authenticationService.loginUser(req).toPromise();
-      if (response && response.token) {
-        // store user details and jwt token in local storage to keep user logged in between page refreshes
-        this.storageService.token = response.token;
-        this.authenticationService.resetIdleCounter();
-        this.storageService.currentUser = response.user.firstName + ' ' + response.user.lastName;
+      if (response) {
+        this.storageService.currentUser = response.firstName + ' ' + response.lastName;
+        this.storageService.userType = 'User';
         this.blockUI.stop();
         this.messageService.sendMessage('User Logged in');
         if (Boolean(this.returnUrl) === false || this.returnUrl === '') {
@@ -62,6 +68,36 @@ export class LoginComponent implements OnInit {
     } catch (error) {
       this.blockUI.stop();
       this.loading = false;
+      this.messageService.showError('Login', error);
+    }
+  }
+
+  async loginStore() {
+    this.loading = true;
+    this.blockUI.start('Validating...');
+    try {
+      const req = new AuthRequest();
+      req.loginName = this.model.username;
+      req.password = this.model.password;
+      const response = await this.authenticationService.loginStore(req).toPromise();
+      if (response) {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        this.storageService.currentUser = response.code;
+        this.storageService.userType = 'Store';
+        this.blockUI.stop();
+        this.messageService.sendMessage('Store Logged in');
+        if (Boolean(this.returnUrl) === false || this.returnUrl === '') {
+          this.returnUrl = '/';
+        }
+        this.router.navigate([this.returnUrl]);
+      } else {
+        this.blockUI.stop();
+        this.messageService.sendMessage('Store Not Logged in');
+      }
+    } catch (error) {
+      this.blockUI.stop();
+      this.loading = false;
+      this.messageService.showError('Login', error);
     }
   }
 }

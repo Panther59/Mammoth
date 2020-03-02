@@ -4,16 +4,21 @@ import { Router } from '@angular/router';
 import { DEFAULT_INTERRUPTSOURCES, Idle } from '@ng-idle/core';
 import { Keepalive } from '@ng-idle/keepalive';
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { AuthRequest } from '../_models/authRequest';
+import { AuthStoreResponse } from '../_models/authStoreResponse';
 import { AuthUserResponse } from '../_models/authUserResponse';
+import { Store } from '../_models/store';
+import { User } from '../_models/user';
 import * as AppGlobal from '../global';
 import { MessageService } from './message.service';
 import { StorageService } from './storage.service';
 
 @Injectable()
 export class AuthenticationService {
+
   @BlockUI() blockUI: NgBlockUI;
   timedOut = false;
   baseUrl = 'https://localhost:5001/';
@@ -79,22 +84,35 @@ export class AuthenticationService {
     this.timedOut = false;
   }
 
-  loginUser(req: AuthRequest): Observable<AuthUserResponse> {
-    return this.httpClient.post<AuthUserResponse>(this.baseUrl + 'api/authenticate/user', req);
+  // loginUser(req: AuthRequest): Observable<AuthUserResponse> {
+  //   return this.httpClient.post<AuthUserResponse>(this.baseUrl + 'api/authenticate/user', req);
+  // }
+
+  loginStore(req: AuthRequest): Observable<Store> {
+    return from(this.httpClient.post<AuthStoreResponse>(this.baseUrl + 'api/authenticate/store', req))
+      .pipe(map((response: AuthStoreResponse) => {
+        // login successful if there's a jwt token in the response
+        if (response && response.token) {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          this.storageService.token = response.token;
+        }
+        this.resetIdleCounter();
+        return response.store;
+      }));
   }
 
-  // loginUser(req: AuthRequest): Observable<User> {
-  //   return from(this.httpClient.get<AuthUserResponse>(this.baseUrl + 'api/authenticate/user'))
-  //     .pipe(map((response: AuthUserResponse) => {
-  //       // login successful if there's a jwt token in the response
-  //       if (response && response.token) {
-  //         // store user details and jwt token in local storage to keep user logged in between page refreshes
-  //         this.storageService.token = response.token;
-  //       }
-  //       this.resetIdleCounter();
-  //       return response.user;
-  //     }));
-  // }
+  loginUser(req: AuthRequest): Observable<User> {
+    return from(this.httpClient.post<AuthUserResponse>(this.baseUrl + 'api/authenticate/user', req))
+      .pipe(map((response: AuthUserResponse) => {
+        // login successful if there's a jwt token in the response
+        if (response && response.token) {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          this.storageService.token = response.token;
+        }
+        this.resetIdleCounter();
+        return response.user;
+      }));
+  }
 
   logout() {
     // remove user from local storage to log user out

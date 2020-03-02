@@ -1,0 +1,169 @@
+<form name="form"
+  (ngSubmit)="f.form.valid && save()"
+  #f="ngForm"
+  novalidate>
+  <div fxLayout="row wrap"
+    fxLayout.xs="column wrap"
+    fxLayoutGap="25px">
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+          name="onlineOrder"
+          type="number"
+          [(ngModel)]="model.onlineOrder"
+          placeholder="Online Order"
+          #onlineOrder="ngModel"
+          required>
+        <mat-error *ngIf="f.submitted && !onlineOrder.valid">
+          Online Order is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+          name="openOrder"
+          type="number"
+          [(ngModel)]="model.openOrder"
+          placeholder="Open Order"
+          #openOrder="ngModel"
+          required>
+        <mat-error *ngIf="f.submitted && !openOrder.valid">
+          Open Order is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+          name="pendingConsignment"
+          type="number"
+          [(ngModel)]="model.pendingConsignment"
+          placeholder="Pending Consignment"
+          #pendingConsignment="ngModel"
+          required>
+        <mat-error *ngIf="f.submitted && !pendingConsignment.valid">
+          Pending Consignment is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+          name="damageQuantity"
+          type="number"
+          [(ngModel)]="model.damageQuantity"
+          placeholder="Damage Quantity"
+          #damageQuantity="ngModel"
+          required>
+        <mat-error *ngIf="f.submitted && !damageQuantity.valid">
+          Damage Quantity is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+          name="pendingSapphireComplain"
+          type="number"
+          [(ngModel)]="model.pendingSapphireComplain"
+          placeholder="Pending Sapphire Complain"
+          #pendingSapphireComplain="ngModel"
+          required>
+        <mat-error *ngIf="f.submitted && !pendingSapphireComplain.valid">
+          Pending Sapphire Complain is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+          name="missingQuantity"
+          type="number"
+          [(ngModel)]="model.missingQuantity"
+          placeholder="Missing Quantity"
+          #missingQuantity="ngModel"
+          required>
+        <mat-error *ngIf="f.submitted && !missingQuantity.valid">
+          Missing Quantity is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+          name="missingCrate"
+          type="number"
+          [(ngModel)]="model.missingCrate"
+          placeholder="Missing Crate"
+          #missingCrate="ngModel"
+          required>
+        <mat-error *ngIf="f.submitted && !missingCrate.valid">
+          Missing Crate is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+          name="totalOnline"
+          type="number"
+          [(ngModel)]="model.totalOnline"
+          placeholder="Total Online"
+          #totalOnline="ngModel"
+          required>
+        <mat-error *ngIf="f.submitted && !totalOnline.valid">
+          Total Online is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+          name="totalMarquee"
+          type="number"
+          [(ngModel)]="model.totalMarquee"
+          placeholder="Total Marquee"
+          #totalMarquee="ngModel"
+          required>
+        <mat-error *ngIf="f.submitted && !totalMarquee.valid">
+          Total Marquee is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+          name="pureMarquee"
+          type="number"
+          [(ngModel)]="model.pureMarquee"
+          placeholder="Pure Marquee"
+          #pureMarquee="ngModel"
+          required>
+        <mat-error *ngIf="f.submitted && !pureMarquee.valid">
+          Pure Marquee is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <input matInput
+          name="cashDeposite"
+          type="number"
+          [(ngModel)]="model.cashDeposite"
+          placeholder="Cash Deposite"
+          #cashDeposite="ngModel"
+          required>
+        <mat-error *ngIf="f.submitted && !cashDeposite.valid">
+          Cash Deposite is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="form-group">
+    <button
+      mat-raised-button
+      color="primary">Save</button>
+    <!--<img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />-->
+  </div>
+</form>

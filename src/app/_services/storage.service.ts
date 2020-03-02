@@ -7,6 +7,7 @@ export class StorageService {
   private readonly tokenKey = 'token';
   private readonly userKey = 'currentUser';
   private readonly userTypeKey = 'userType';
+  private readonly loginUserTypeKey = 'loginUserType';
 
   get theme(): string {
     return this.getStorageString(this.themeKey);
@@ -38,6 +39,14 @@ export class StorageService {
 
   set userType(userType: string) {
     this.setStorageString(this.userTypeKey, userType);
+  }
+
+  get loginUserType(): string {
+    return this.getStorageString(this.loginUserTypeKey);
+  }
+
+  set loginUserType(loginUserType: string) {
+    this.setStorageString(this.loginUserTypeKey, loginUserType);
   }
 
   private getStorageData<T>(key: string) {

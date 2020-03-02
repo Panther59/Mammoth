@@ -1,130 +1,137 @@
-<div class="mat-app-background fullHeightDiv">
-  <mat-sidenav-container class="fullHeightDiv">
-    <mat-sidenav #sidenav
-      mode="over">
-      <div class="toolbar">
-        <mat-toolbar color="accent">
-          <div class="toolBarBrand">
-            <span class="d-none d-md-inline toolBarBrand">
+<block-ui>
+  <div class="mat-app-background fullHeightDiv">
+    <ng-progress color="red"></ng-progress>
+    <mat-sidenav-container>
+
+      <mat-sidenav-container class="fullHeightDiv">
+        <mat-sidenav #sidenav
+          mode="over">
+          <div class="toolbar">
+            <mat-toolbar color="accent">
+              <div class="toolBarBrand">
+                <span class="d-none d-md-inline toolBarBrand">
+                  <div class="navbar-brand"
+                    style="display: inline-flex">
+                    <img class="navbar-brand-image"
+                      src="../favicon.ico" />
+                  </div>
+                </span>
+              </div>
+            </mat-toolbar>
+          </div>
+          <div class="profileData">
+            <div>
+              <mat-accordion>
+                <mat-expansion-panel #userPanel
+                  class="usernamePanel">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                      <div>
+                        <div>Guest</div>
+                      </div>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <mat-nav-list class="matexpansionpanelbody">
+                    <a mat-list-item
+                      (click)="userPanel.close();sidenav.close()"
+                      routerLink="/profile">Profile</a>
+                    <a mat-list-item
+                      (click)="userPanel.close();sidenav.close()">Close</a>
+                  </mat-nav-list>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+          <mat-nav-list>
+            <a mat-list-item
+              (click)="sidenav.close()"
+              routerLink="/home">Home</a>
+            <a mat-list-item
+              (click)="sidenav.close()"
+              routerLink="/dashboard">Dashboard</a>
+            <a mat-list-item
+              (click)="viewTheme();sidenav.close()">Themes</a>
+            <mat-divider></mat-divider>
+          </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-toolbar color="primary">
+          <button mat-icon-button
+            class="d-md-none sideBarToggler"
+            (click)="sidenav.open()">
+            <mat-icon>menu</mat-icon>
+          </button>
+
+          <span class="d-none d-md-inline toolBarBrand">
+            <button mat-button
+              class="nav-button"
+              [routerLinkActive]="['active']"
+              routerLink="#">
               <div class="navbar-brand"
                 style="display: inline-flex">
                 <img class="navbar-brand-image"
                   src="../favicon.ico" />
               </div>
-            </span>
-          </div>
-        </mat-toolbar>
-      </div>
-      <div class="profileData">
-        <div>
-          <mat-accordion>
-            <mat-expansion-panel #userPanel
-              class="usernamePanel">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <div>
-                    <div>Guest</div>
-                  </div>
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <mat-nav-list class="matexpansionpanelbody">
-                <a mat-list-item
-                  (click)="userPanel.close();sidenav.close()"
-                  routerLink="/profile">Profile</a>
-                <a mat-list-item
-                  (click)="userPanel.close();sidenav.close()">Close</a>
-              </mat-nav-list>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
-      </div>
-      <mat-nav-list>
-        <a mat-list-item
-          (click)="sidenav.close()"
-          routerLink="/home">Home</a>
-          <a mat-list-item
-          (click)="sidenav.close()"
-          routerLink="/dashboard">Dashboard</a>
-        <a mat-list-item
-          (click)="viewTheme();sidenav.close()">Themes</a>
-        <mat-divider></mat-divider>
-      </mat-nav-list>
-    </mat-sidenav>
+              <span>Angular</span>
+            </button>
+          </span>
 
-    <mat-toolbar color="primary">
-      <button mat-icon-button
-        class="d-md-none sideBarToggler"
-        (click)="sidenav.open()">
-        <mat-icon>menu</mat-icon>
-      </button>
-
-      <span class="d-none d-md-inline toolBarBrand">
-        <button mat-button
-          class="nav-button"
-          [routerLinkActive]="['active']"
-          routerLink="#">
-          <div class="navbar-brand"
-            style="display: inline-flex">
-            <img class="navbar-brand-image"
-              src="../favicon.ico" />
-          </div>
-          <span>Angular</span>
-        </button>
-      </span>
-
-      <span class="d-none d-md-inline toolbarMenus">
-        <button mat-button
-          class="nav-button"
-          [routerLinkActive]="['active']"
-          routerLink="home">Home</button>
-      </span>
-
-      <span class="d-none d-md-inline toolbarMenus">
-        <button mat-button
-          class="nav-button"
-          [routerLinkActive]="['active']"
-          routerLink="dashboard">Dashboard</button>
-      </span>
-
-      <span class="fillRemainingSpace"></span>
-
-      <span class="d-none d-md-inline toolbarMenus">
-        <button mat-button
-          [matMenuTriggerFor]="toolbarUserMenu">
-          <div style="display: inline-block"
-            height="20px">
-          </div>
-          <span> Guest </span>
-          <mat-icon>keyboard_arrow_down</mat-icon>
-        </button>
-
-        <mat-menu #toolbarUserMenu="matMenu">
-          <span class="d-none d-md-inline">
-            <button mat-menu-item
+          <span class="d-none d-md-inline toolbarMenus">
+            <button mat-button
               class="nav-button"
               [routerLinkActive]="['active']"
-              routerLink="/profile">Profile</button>
+              routerLink="home">Home</button>
           </span>
 
-          <span class="d-none d-md-inline">
-            <button mat-menu-item
+          <span class="d-none d-md-inline toolbarMenus">
+            <button mat-button
               class="nav-button"
-              (click)="viewTheme();sidenav.close()">Themes</button>
+              [routerLinkActive]="['active']"
+              routerLink="dashboard">Dashboard</button>
           </span>
 
-          <span class="d-none d-md-inline" *ngIf="isLoggedIn()">
-            <button mat-menu-item
-              class="nav-button"
-              (click)="logout();sidenav.close()">Logout</button>
+          <span class="fillRemainingSpace"></span>
+
+          <span class="d-none d-md-inline toolbarMenus">
+            <button mat-button
+              [matMenuTriggerFor]="toolbarUserMenu">
+              <div style="display: inline-block"
+                height="20px">
+              </div>
+              <span> Guest </span>
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+
+            <mat-menu #toolbarUserMenu="matMenu">
+              <span class="d-none d-md-inline">
+                <button mat-menu-item
+                  class="nav-button"
+                  [routerLinkActive]="['active']"
+                  routerLink="/profile">Profile</button>
+              </span>
+
+              <span class="d-none d-md-inline">
+                <button mat-menu-item
+                  class="nav-button"
+                  (click)="viewTheme();sidenav.close()">Themes</button>
+              </span>
+
+              <span class="d-none d-md-inline"
+                *ngIf="isLoggedIn()">
+                <button mat-menu-item
+                  class="nav-button"
+                  (click)="logout();sidenav.close()">Logout</button>
+              </span>
+
+            </mat-menu>
           </span>
+        </mat-toolbar>
 
-        </mat-menu>
-      </span>
-    </mat-toolbar>
-
-    <div class="content container"
-      [@routerTransition]="o.isActivated && o.activatedRoute.routeConfig.path">
-      <router-outlet #o="outlet"></router-outlet>
-    </div>
-  </mat-sidenav-container>
-</div>
+        <div class="content container"
+          [@routerTransition]="o.isActivated && o.activatedRoute.routeConfig.path">
+          <router-outlet #o="outlet"></router-outlet>
+        </div>
+      </mat-sidenav-container>
+    </mat-sidenav-container>
+  </div>
+</block-ui>
