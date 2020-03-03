@@ -12,15 +12,15 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { TokenInterceptor } from '../_interceptors/token.interceptor';
 import { DefaultComponent } from './default/default.component';
-import { HomeRoutingModule } from './home-routing.module';
 import { ProductSaleComponent } from './product-sale/product-sale.component';
+import { SaleRoutingModule } from './sale-routing.module';
 import { StoreSaleComponent } from './store-sale/store-sale.component';
 
 @NgModule({
   declarations: [DefaultComponent, StoreSaleComponent, ProductSaleComponent],
   imports: [
     CommonModule,
-    HomeRoutingModule,
+    SaleRoutingModule,
     MatTabsModule,
     MatInputModule,
     MatFormFieldModule,
@@ -37,4 +37,4 @@ import { StoreSaleComponent } from './store-sale/store-sale.component';
     multi: true,
   }]
 })
-export class HomeModule { }
+export class SaleModule { }

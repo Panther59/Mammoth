@@ -9,6 +9,10 @@
         background-color: mat-color($warn);
     };
 
+    .navbar-brand-image{
+      max-width: 35px;
+      margin-right: 5px;
+    }
     .fullHeightDiv{
         height: 100%;
     }

@@ -57,10 +57,32 @@ export class AppComponent {
       this.selectTheme(result);
     }
   }
-  logout(){
+  logout() {
     this.authenticationService.logout();
   }
-  isLoggedIn(){
+
+  isLoggedIn() {
     return this.storageService.token && this.storageService.currentUser;
+  }
+
+  getUserName() {
+    if (this.storageService.token &&
+      this.storageService.currentUser) {
+      return this.storageService.currentUser;
+    } else {
+      return 'Guest';
+    }
+  }
+
+  isStoreUser() {
+    return this.storageService.token &&
+      this.storageService.currentUser &&
+      this.storageService.userType === 'Store';
+  }
+
+  isSupUser() {
+    return this.storageService.token &&
+      this.storageService.currentUser &&
+      this.storageService.userType === 'User';
   }
 }

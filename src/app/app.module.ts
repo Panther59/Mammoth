@@ -15,7 +15,8 @@ import { BlockUIModule } from 'ng-block-ui';
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
 
-import { AuthGuard } from './_guards/auth.guard';
+import { StoreAuthGuard } from './_guards/storeAuth.guard';
+import { UserAuthGuard } from './_guards/userAuth.guard';
 import { TokenInterceptor } from './_interceptors/token.interceptor';
 import { AuthenticationService } from './_services/authentication.service';
 import { FilesService } from './_services/files.services';
@@ -55,7 +56,8 @@ import { SharedModule } from './shared/shared.module';
     SalesService,
     MessageService,
     FilesService,
-    AuthGuard,
+    StoreAuthGuard,
+    UserAuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

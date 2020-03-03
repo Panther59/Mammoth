@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
         this.blockUI.stop();
         this.messageService.sendMessage('User Logged in');
         if (Boolean(this.returnUrl) === false || this.returnUrl === '') {
-          this.returnUrl = '/';
+          this.returnUrl = '/dashboard';
         }
         this.router.navigate([this.returnUrl]);
       } else {
@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
         this.blockUI.stop();
         this.messageService.sendMessage('Store Logged in');
         if (Boolean(this.returnUrl) === false || this.returnUrl === '') {
-          this.returnUrl = '/';
+          this.returnUrl = '/sale';
         }
         this.router.navigate([this.returnUrl]);
       } else {
