@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 
@@ -25,6 +26,7 @@ import { StoreSaleComponent } from './store-sale/store-sale.component';
     MatFormFieldModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatIconModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     FormsModule,

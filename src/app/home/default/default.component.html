@@ -1,8 +1,26 @@
 <mat-tab-group>
-  <mat-tab label="Product Sale">
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="green"
+        *ngIf="isStoreDataMissing() === false"
+        class="example-tab-icon">check_circle</mat-icon>
+      <mat-icon class="red"
+        *ngIf="isStoreDataMissing() === true"
+        class="example-tab-icon">warning</mat-icon>
+      <span> Overall Sale </span>
+    </ng-template>
     <app-store-sale></app-store-sale>
   </mat-tab>
-  <mat-tab label="Overall Sale">
+  <mat-tab >
+    <ng-template mat-tab-label>
+      <mat-icon class="success"
+        *ngIf="isProductDataMissing() === false"
+        class="example-tab-icon">check_circle</mat-icon>
+      <mat-icon class="error"
+        *ngIf="isProductDataMissing() === true"
+        class="example-tab-icon">warning</mat-icon>
+      <span> Product Sale </span>
+    </ng-template>
     <app-product-sale></app-product-sale>
   </mat-tab>
 </mat-tab-group>
