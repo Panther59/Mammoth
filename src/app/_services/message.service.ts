@@ -28,7 +28,11 @@ export class MessageService {
 
     let message = error.message;
     if (error instanceof HttpErrorResponse) {
-      message = error.error.error;
+      if (error.error.error) {
+        message = error.error.error;
+      } else {
+        message = error.error;
+      }
     }
 
     await this.showMessage(title, message, buttonText);

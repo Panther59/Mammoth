@@ -6,12 +6,12 @@
     fxLayout.xs="column wrap"
     fxLayoutGap="25px">
     <div class="form-group" *ngFor="let p of products">
-      <mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>{{p.product.name}}</mat-label>
         <input matInput
           [name]="'product'+p.product.name"
           type="number"
           [(ngModel)]="p.saleCount"
-          [placeholder]="p.product.name"
           required>
         <mat-error *ngIf="f.submitted">
           {{p.product.name + ' is required'}}

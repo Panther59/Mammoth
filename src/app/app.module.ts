@@ -21,6 +21,7 @@ import { TokenInterceptor } from './_interceptors/token.interceptor';
 import { AuthenticationService } from './_services/authentication.service';
 import { FilesService } from './_services/files.services';
 import { MessageService } from './_services/message.service';
+import { ReportsService } from './_services/reports.service';
 import { SalesService } from './_services/sales.service';
 import { StorageService } from './_services/storage.service';
 import { AppRoutingModule } from './app-routing.module';
@@ -48,7 +49,7 @@ import { SharedModule } from './shared/shared.module';
     MatListModule,
     MatExpansionModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [
     AuthenticationService,
@@ -58,6 +59,7 @@ import { SharedModule } from './shared/shared.module';
     FilesService,
     StoreAuthGuard,
     UserAuthGuard,
+    ReportsService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

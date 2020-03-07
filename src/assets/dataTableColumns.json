@@ -1,0 +1,16 @@
+[
+  {
+    "settingName": "summary",
+    "displayName": "Summary",
+    "columns": [
+      {
+        "name": "store.code",
+        "displayName": "Store"
+      },
+      {
+        "name": "isDataSubmitted",
+        "displayName": "Submitted"
+      }
+    ]
+  }
+]

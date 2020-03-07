@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay, dematerialize, materialize, mergeMap } from 'rxjs/operators';
 
-import { AuthUserResponse } from '../_models/authUserResponse';
+import { AuthResponse } from '../_models/authResponse';
 import { User } from '../_models/user';
 
 @Injectable()
@@ -31,7 +31,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   // route functions
 
   authenticate() {
-    const response = new AuthUserResponse();
+    const response = new AuthResponse();
     response.user = new User();
     response.user.firstName = 'Utkarsh';
     response.user.lastName = 'Chauhan';

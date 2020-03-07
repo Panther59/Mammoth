@@ -24,6 +24,7 @@ export class AppComponent {
     private router: Router,
     private storageService: StorageService,
     public dialog: MatDialog) {
+    this.authenticationService.appllicationStartup();
     this.selectTheme(this.storageService.theme);
   }
   selectTheme(theme: string = null) {

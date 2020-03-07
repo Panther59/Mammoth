@@ -1,4 +1,4 @@
-﻿import { HttpClient } from '@angular/common/http';
+﻿import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { DEFAULT_INTERRUPTSOURCES, Idle } from '@ng-idle/core';
@@ -8,8 +8,7 @@ import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { AuthRequest } from '../_models/authRequest';
-import { AuthStoreResponse } from '../_models/authStoreResponse';
-import { AuthUserResponse } from '../_models/authUserResponse';
+import { AuthResponse } from '../_models/authResponse';
 import { Store } from '../_models/store';
 import { User } from '../_models/user';
 import * as AppGlobal from '../global';
@@ -64,19 +63,18 @@ export class AuthenticationService {
 
   appllicationStartup() {
     this.setupIdleMonitor();
-    // if (this.storageService.token != null) {
-    //   this.blockUI.start('Loading...');
-    //   this.getCurrentLogin().subscribe((data) => {
-    //     this.storageService.currentUser = data;
-    //     this.resetIdleCounter();
-    //     this.blockUI.stop();
-    //   },
-    //     (error) => {
-    //       this.logout();
-    //       this.navigateToLogin(false);
-    //       this.blockUI.stop();
-    //     });
-    // }
+    if (this.storageService.token != null) {
+      this.blockUI.start('Loading...');
+      this.getCurrentLogin().subscribe((data) => {
+        this.resetIdleCounter();
+        this.blockUI.stop();
+      },
+        (error) => {
+          this.blockUI.stop();
+          this.logout();
+          this.navigateToLogin(false);
+        });
+    }
   }
 
   resetIdleCounter() {
@@ -84,13 +82,23 @@ export class AuthenticationService {
     this.timedOut = false;
   }
 
-  // loginUser(req: AuthRequest): Observable<AuthUserResponse> {
-  //   return this.httpClient.post<AuthUserResponse>(this.baseUrl + 'api/authenticate/user', req);
-  // }
+  getCurrentLogin(): Observable<void> {
+    const headers = new HttpHeaders().append('Authorization', `Bearer ${this.storageService.token}`);
+    return from(this.httpClient.get<AuthResponse>(this.baseUrl + 'api/authenticate/current', { headers }))
+      .pipe(map((response: AuthResponse) => {
+        // login successful if there's a jwt token in the response
+        if (response && response.token) {
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          this.storageService.token = response.token;
+          this.storageService.userType = response.type;
+        }
+        this.resetIdleCounter();
+      }));
+  }
 
   loginStore(req: AuthRequest): Observable<Store> {
-    return from(this.httpClient.post<AuthStoreResponse>(this.baseUrl + 'api/authenticate/store', req))
-      .pipe(map((response: AuthStoreResponse) => {
+    return from(this.httpClient.post<AuthResponse>(this.baseUrl + 'api/authenticate/store', req))
+      .pipe(map((response: AuthResponse) => {
         // login successful if there's a jwt token in the response
         if (response && response.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -102,8 +110,8 @@ export class AuthenticationService {
   }
 
   loginUser(req: AuthRequest): Observable<User> {
-    return from(this.httpClient.post<AuthUserResponse>(this.baseUrl + 'api/authenticate/user', req))
-      .pipe(map((response: AuthUserResponse) => {
+    return from(this.httpClient.post<AuthResponse>(this.baseUrl + 'api/authenticate/user', req))
+      .pipe(map((response: AuthResponse) => {
         // login successful if there's a jwt token in the response
         if (response && response.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
