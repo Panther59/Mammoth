@@ -28,10 +28,10 @@ export class MessageService {
 
     let message = error.message;
     if (error instanceof HttpErrorResponse) {
-      if (error.error.error) {
+      if (error.error && error.error.error) {
         message = error.error.error;
-      } else {
-        message = error.error;
+      } else if (error.error && error.error.message) {
+        message = error.error.message;
       }
     }
 

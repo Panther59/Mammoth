@@ -1,23 +1,23 @@
-﻿import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { DEFAULT_INTERRUPTSOURCES, Idle } from '@ng-idle/core';
-import { Keepalive } from '@ng-idle/keepalive';
+﻿import * as AppGlobal from '../global';
+
 import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { from, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { DEFAULT_INTERRUPTSOURCES, Idle } from '@ng-idle/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, from } from 'rxjs';
 
 import { AuthRequest } from '../_models/authRequest';
 import { AuthResponse } from '../_models/authResponse';
+import { Injectable } from '@angular/core';
+import { Keepalive } from '@ng-idle/keepalive';
+import { MessageService } from './message.service';
+import { Router } from '@angular/router';
+import { StorageService } from './storage.service';
 import { Store } from '../_models/store';
 import { User } from '../_models/user';
-import * as AppGlobal from '../global';
-import { MessageService } from './message.service';
-import { StorageService } from './storage.service';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthenticationService {
-
   @BlockUI() blockUI: NgBlockUI;
   timedOut = false;
   baseUrl = 'https://localhost:5001/';
@@ -61,19 +61,19 @@ export class AuthenticationService {
     }
   }
 
-  appllicationStartup() {
+  async appllicationStartup() {
     this.setupIdleMonitor();
     if (this.storageService.token != null) {
-      this.blockUI.start('Loading...');
-      this.getCurrentLogin().subscribe((data) => {
+      try {
+        this.blockUI.start('Loading...');
+        await this.getCurrentLogin().toPromise();
         this.resetIdleCounter();
         this.blockUI.stop();
-      },
-        (error) => {
-          this.blockUI.stop();
-          this.logout();
-          this.navigateToLogin(false);
-        });
+      } catch (error) {
+        this.blockUI.stop();
+        this.logout();
+        this.navigateToLogin(false);
+      }
     }
   }
 
@@ -83,8 +83,7 @@ export class AuthenticationService {
   }
 
   getCurrentLogin(): Observable<void> {
-    const headers = new HttpHeaders().append('Authorization', `Bearer ${this.storageService.token}`);
-    return from(this.httpClient.get<AuthResponse>(this.baseUrl + 'api/authenticate/current', { headers }))
+    return from(this.httpClient.get<AuthResponse>(this.baseUrl + 'api/authenticate/current'))
       .pipe(map((response: AuthResponse) => {
         // login successful if there's a jwt token in the response
         if (response && response.token) {
@@ -120,6 +119,10 @@ export class AuthenticationService {
         this.resetIdleCounter();
         return response.user;
       }));
+  }
+
+  changePassword(model: any) {
+    return this.httpClient.post<void>(this.baseUrl + 'api/authenticate/changePassword', model);
   }
 
   logout() {

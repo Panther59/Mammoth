@@ -34,6 +34,8 @@
                     </mat-expansion-panel-header>
                     <mat-nav-list class="matexpansionpanelbody">
                       <a mat-list-item *ngIf="isLoggedIn()"
+                        (click)="sidenav.close();goToProfile()">Profile</a>
+                      <a mat-list-item *ngIf="isLoggedIn()"
                         (click)="sidenav.close();logout()">Logout</a>
                     </mat-nav-list>
                   </mat-expansion-panel>
@@ -66,7 +68,7 @@
               <button mat-button
                 class="nav-button"
                 [routerLinkActive]="['active']"
-                routerLink="#">
+                (click)="goToHome()">
                 <div class="navbar-brand"
                   style="display: inline-flex">
                   <img class="navbar-brand-image"

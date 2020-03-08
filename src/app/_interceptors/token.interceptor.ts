@@ -26,8 +26,9 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log('token added');
     if (this.storageService.token) {
-      request = request.clone();
-      request.headers.append('Authorization', `Bearer ${this.storageService.token}`);
+      let headers = request.headers;
+      headers = headers.append('Authorization', `Bearer ${this.storageService.token}`);
+      request = request.clone({ headers });
     }
 
     return next.handle(request).pipe(catchError(x => this.handleAuthError(x)));

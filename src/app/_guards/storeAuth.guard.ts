@@ -24,7 +24,7 @@ export class StoreAuthGuard implements CanActivate {
     } else {
       // not logged in so redirect to login page with the return url
       const returnUrl = state.url;
-      if (returnUrl === '/') {
+      if (returnUrl === '/' || returnUrl === '/login') {
         this.router.navigate(['/login']);
       } else {
         this.router.navigate(['/login'], { queryParams: { returnUrl } });

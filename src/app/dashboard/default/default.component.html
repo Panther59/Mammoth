@@ -1,38 +1,52 @@
-<div>
+<div class="controls">
   <mat-form-field>
     <mat-label>Bussiness Date</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="businessDate" (ngModelChange)="businessDateChanged()">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <input matInput
+      [matDatepicker]="picker"
+      [(ngModel)]="businessDate"
+      (ngModelChange)="businessDateChanged()">
+    <mat-datepicker-toggle matSuffix
+      [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
+  <div class="buttonDiv">
+    <button mat-raised-button
+      color="primary"
+      (click)="downloadReport()">Download Report</button>
+  </div>
+  <div class="buttonDiv">
+    <button mat-raised-button
+      color="primary"
+      (click)="deleteOldData()">Delete Old Data</button>
+  </div>
 </div>
 <div>
-  <button mat-raised-button color="primary" (click)="downloadReport()">Download Report</button>
-</div>
-<div>
-<mat-table [dataSource]="data"
-  class="mat-elevation-z8">
-  <!-- Position Column -->
-  <ng-container matColumnDef="store">
-    <mat-header-cell *matHeaderCellDef> Store </mat-header-cell>
-    <mat-cell *matCellDef="let element"> {{element.store.code}} </mat-cell>
-  </ng-container>
+  <mat-table [dataSource]="dataSource"
+    class="mat-elevation-z8"
+    matSort>
+    <!-- Position Column -->
+    <ng-container matColumnDef="store">
+      <mat-header-cell *matHeaderCellDef
+        mat-sort-header> Store </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.store.code}} </mat-cell>
+    </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="sumbitted">
-    <mat-header-cell *matHeaderCellDef> Submitted </mat-header-cell>
-    <mat-cell *matCellDef="let element">
-      <div>
-        <mat-icon *ngIf="element.isDataSubmitted === true"
-          class="success">check_circle</mat-icon>
-        <mat-icon *ngIf="element.isDataSubmitted === false"
-          class="warning">warning</mat-icon>
-      </div>
-    </mat-cell>
-  </ng-container>
+    <!-- Name Column -->
+    <ng-container matColumnDef="sumbitted">
+      <mat-header-cell *matHeaderCellDef
+        mat-sort-header> Submitted </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div>
+          <mat-icon *ngIf="element.isDataSubmitted === true"
+            class="success">check_circle</mat-icon>
+          <mat-icon *ngIf="element.isDataSubmitted === false"
+            class="warning">warning</mat-icon>
+        </div>
+      </mat-cell>
+    </ng-container>
 
 
-  <mat-header-row *matHeaderRowDef="['store', 'sumbitted']"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: ['store', 'sumbitted'];"></mat-row>
-</mat-table>
+    <mat-header-row *matHeaderRowDef="['store', 'sumbitted']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['store', 'sumbitted'];"></mat-row>
+  </mat-table>
 </div>

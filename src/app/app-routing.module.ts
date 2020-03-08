@@ -14,6 +14,10 @@ const routes: Routes = [
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then(m => m.ProfileModule)
+  },
+  {
     path: 'sale',
     loadChildren: () => import('./sale/sale.module').then(m => m.SaleModule), canActivate: [StoreAuthGuard]
   },

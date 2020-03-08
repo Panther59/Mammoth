@@ -16,13 +16,15 @@ export class ReportsService {
   }
 
   getReportsSummary(date: Date): Observable<Array<StoreSaleReport>> {
-    const headers = new HttpHeaders().append('Authorization', `Bearer ${this.storageService.token}`);
-    return this.httpClient.get<Array<StoreSaleReport>>(this.baseUrl + 'api/reports/summary/' + this.getDateFormat(date), { headers });
+    return this.httpClient.get<Array<StoreSaleReport>>(this.baseUrl + 'api/reports/summary/' + this.getDateFormat(date));
+  }
+
+  deleteOldData(): Observable<void> {
+    return this.httpClient.post<void>(this.baseUrl + 'api/reports/cleanup', null);
   }
 
   downloadReport(date: Date): Observable<Blob> {
-    let headers = new HttpHeaders().append('Authorization', `Bearer ${this.storageService.token}`);
-    headers = headers.append('responseType', 'blob');
+    const headers = new HttpHeaders().append('responseType', 'blob');
     return this.httpClient.get(
       this.baseUrl + 'api/reports/report/' + this.getDateFormat(date),
       {

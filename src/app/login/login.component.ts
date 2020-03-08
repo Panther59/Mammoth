@@ -65,9 +65,10 @@ export class LoginComponent implements OnInit {
         this.blockUI.stop();
         this.messageService.sendMessage('User Not Logged in');
       }
-    } catch (error) {
-      this.blockUI.stop();
       this.loading = false;
+    } catch (error) {
+      this.loading = false;
+      this.blockUI.stop();
       this.messageService.showError('Login', error);
     }
   }
@@ -94,9 +95,10 @@ export class LoginComponent implements OnInit {
         this.blockUI.stop();
         this.messageService.sendMessage('Store Not Logged in');
       }
-    } catch (error) {
-      this.blockUI.stop();
       this.loading = false;
+    } catch (error) {
+      this.loading = false;
+      this.blockUI.stop();
       this.messageService.showError('Login', error);
     }
   }

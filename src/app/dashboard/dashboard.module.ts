@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
@@ -26,7 +27,8 @@ import { DefaultComponent } from './default/default.component';
     MatDatepickerModule,
     MatFormFieldModule,
     DashboardRoutingModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSortModule
   ]
 })
 export class DashboardModule { }

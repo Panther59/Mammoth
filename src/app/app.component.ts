@@ -1,12 +1,12 @@
-import { OverlayContainer } from '@angular/cdk/overlay';
-import { Component, HostBinding } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Component, HostBinding } from '@angular/core';
 
-import { routerTransition } from './_animations/router.transition.animation';
 import { AuthenticationService } from './_services/authentication.service';
+import { MatDialog } from '@angular/material/dialog';
+import { OverlayContainer } from '@angular/cdk/overlay';
 import { StorageService } from './_services/storage.service';
 import { ThemeDialogComponent } from './shared/theme-dialog/theme-dialog.component';
+import { routerTransition } from './_animations/router.transition.animation';
 
 @Component({
   selector: 'app-root',
@@ -62,6 +62,18 @@ export class AppComponent {
     this.authenticationService.logout();
   }
 
+  goToHome() {
+    if (this.storageService.userType === 'User') {
+      this.router.navigate(['/dashboard']);
+    } else if (this.storageService.userType === 'User') {
+      this.router.navigate(['/sale']);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+  goToProfile() {
+    this.router.navigate(['/profile']);
+  }
   isLoggedIn() {
     return this.storageService.token && this.storageService.currentUser;
   }

@@ -5,3 +5,15 @@
 .warning {
   color: red;
 }
+
+.controls {
+  display: inline-flex;
+
+  .buttonDiv {
+    margin-left: 20px !important;
+  }
+}
+
+mat-header-row, mat-row, mat-footer-row {
+  min-height: 30px;
+}

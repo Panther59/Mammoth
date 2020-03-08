@@ -4,7 +4,7 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 import { StorageService } from '../_services/storage.service';
 
 @Injectable()
-export class UserAuthGuard implements CanActivate {
+export class LoginAuthGuard implements CanActivate {
 
   constructor(
     private storageService: StorageService,
@@ -12,7 +12,7 @@ export class UserAuthGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.storageService.token != null && this.storageService.userType === 'User') {
+    if (this.storageService.token != null && (this.storageService.userType === 'User' || this.storageService.userType === 'Store')) {
       // logged in so return true
       return true;
     }
