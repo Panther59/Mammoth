@@ -2,6 +2,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MAT_DATE_LOCALE, NativeDateAdapter } from '@angular/material/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -15,6 +16,7 @@ import { BlockUIModule } from 'ng-block-ui';
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
 
+import { IndianDateAdapter } from './_adapter/indianDateAdapter';
 import { StoreAuthGuard } from './_guards/storeAuth.guard';
 import { UserAuthGuard } from './_guards/userAuth.guard';
 import { TokenInterceptor } from './_interceptors/token.interceptor';
@@ -65,6 +67,8 @@ import { SharedModule } from './shared/shared.module';
       useClass: TokenInterceptor,
       multi: true,
     },
+    { provide: MAT_DATE_LOCALE, useValue: 'en-IN' },
+    { provide: NativeDateAdapter, useClass: IndianDateAdapter },
   ],
   bootstrap: [AppComponent]
 })

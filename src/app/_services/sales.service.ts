@@ -1,18 +1,18 @@
-﻿import { BlockUI, NgBlockUI } from 'ng-block-ui';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+﻿import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MessageService } from './message.service';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Observable } from 'rxjs';
+
 import { ProductSale } from '../_models/productSale';
-import { StorageService } from './storage.service';
 import { StoreSale } from '../_models/storeSale';
+import { MessageService } from './message.service';
+import { StorageService } from './storage.service';
 
 @Injectable()
 export class SalesService {
   @BlockUI() blockUI: NgBlockUI;
   timedOut = false;
-  baseUrl = 'https://localhost:5001/';
+  baseUrl = 'https://mammothapi.azurewebsites.net/';
   constructor(
     private httpClient: HttpClient,
     private storageService: StorageService,

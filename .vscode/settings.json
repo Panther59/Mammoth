@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/621465d9-b6cb-4e7a-80ff-d42b77b004e4/resourceGroups/MammothResourceGroup/providers/Microsoft.Web/sites/MammothPortal",
+    "appService.deploySubpath": ""
+}

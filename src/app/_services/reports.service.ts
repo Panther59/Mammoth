@@ -8,7 +8,7 @@ import { StorageService } from './storage.service';
 
 @Injectable()
 export class ReportsService {
-  baseUrl = 'https://localhost:5001/';
+  baseUrl = 'https://mammothapi.azurewebsites.net/';
   constructor(
     private httpClient: HttpClient,
     private storageService: StorageService,

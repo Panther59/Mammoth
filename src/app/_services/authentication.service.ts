@@ -1,26 +1,23 @@
-﻿import * as AppGlobal from '../global';
-
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
+﻿import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { DEFAULT_INTERRUPTSOURCES, Idle } from '@ng-idle/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, from } from 'rxjs';
+import { Keepalive } from '@ng-idle/keepalive';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 import { AuthRequest } from '../_models/authRequest';
 import { AuthResponse } from '../_models/authResponse';
-import { Injectable } from '@angular/core';
-import { Keepalive } from '@ng-idle/keepalive';
+import * as AppGlobal from '../global';
 import { MessageService } from './message.service';
-import { Router } from '@angular/router';
 import { StorageService } from './storage.service';
-import { Store } from '../_models/store';
-import { User } from '../_models/user';
-import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthenticationService {
   @BlockUI() blockUI: NgBlockUI;
   timedOut = false;
-  baseUrl = 'https://localhost:5001/';
+  baseUrl = 'https://mammothapi.azurewebsites.net/';
   constructor(
     private httpClient: HttpClient,
     private storageService: StorageService,
@@ -83,7 +80,7 @@ export class AuthenticationService {
   }
 
   getCurrentLogin(): Observable<void> {
-    return from(this.httpClient.get<AuthResponse>(this.baseUrl + 'api/authenticate/current'))
+    return this.httpClient.get<AuthResponse>(this.baseUrl + 'api/authenticate/current')
       .pipe(map((response: AuthResponse) => {
         // login successful if there's a jwt token in the response
         if (response && response.token) {
@@ -92,33 +89,17 @@ export class AuthenticationService {
           this.storageService.userType = response.type;
         }
         this.resetIdleCounter();
+      }), catchError(error => {
+        return throwError(error);
       }));
   }
 
-  loginStore(req: AuthRequest): Observable<Store> {
-    return from(this.httpClient.post<AuthResponse>(this.baseUrl + 'api/authenticate/store', req))
-      .pipe(map((response: AuthResponse) => {
-        // login successful if there's a jwt token in the response
-        if (response && response.token) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          this.storageService.token = response.token;
-        }
-        this.resetIdleCounter();
-        return response.store;
-      }));
+  loginStore(req: AuthRequest): Observable<AuthResponse> {
+    return this.httpClient.post<AuthResponse>(this.baseUrl + 'api/authenticate/store', req);
   }
 
-  loginUser(req: AuthRequest): Observable<User> {
-    return from(this.httpClient.post<AuthResponse>(this.baseUrl + 'api/authenticate/user', req))
-      .pipe(map((response: AuthResponse) => {
-        // login successful if there's a jwt token in the response
-        if (response && response.token) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          this.storageService.token = response.token;
-        }
-        this.resetIdleCounter();
-        return response.user;
-      }));
+  loginUser(req: AuthRequest): Observable<AuthResponse> {
+    return this.httpClient.post<AuthResponse>(this.baseUrl + 'api/authenticate/user', req);
   }
 
   changePassword(model: any) {

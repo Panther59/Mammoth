@@ -16,15 +16,14 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   private handleAuthError(err: HttpErrorResponse): Observable<any> {
-    if (err.status === 401 || err.status === 403) {
+    if (!err.url.includes('/authenticate/') && (err.status === 401 || err.status === 403)) {
       this.router.navigateByUrl('/login');
-      return of(err.message); // or EMPTY may be appropriate here
+      return of(err && err.error && err.error.error ? err.error.error : err.message); // or EMPTY may be appropriate here
     }
     return throwError(err);
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('token added');
     if (this.storageService.token) {
       let headers = request.headers;
       headers = headers.append('Authorization', `Bearer ${this.storageService.token}`);

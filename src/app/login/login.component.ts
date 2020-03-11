@@ -52,8 +52,13 @@ export class LoginComponent implements OnInit {
       req.loginName = this.model.username;
       req.password = this.model.password;
       const response = await this.authenticationService.loginUser(req).toPromise();
-      if (response) {
-        this.storageService.currentUser = response.firstName + ' ' + response.lastName;
+      if (response && response.token) {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        this.storageService.token = response.token;
+      }
+      this.authenticationService.resetIdleCounter();
+      if (response.user) {
+        this.storageService.currentUser = response.user.firstName + ' ' + response.user.lastName;
         this.storageService.userType = 'User';
         this.blockUI.stop();
         this.messageService.sendMessage('User Logged in');
@@ -81,9 +86,14 @@ export class LoginComponent implements OnInit {
       req.loginName = this.model.username;
       req.password = this.model.password;
       const response = await this.authenticationService.loginStore(req).toPromise();
+      if (response && response.token) {
+        // store user details and jwt token in local storage to keep user logged in between page refreshes
+        this.storageService.token = response.token;
+      }
+      this.authenticationService.resetIdleCounter();
       if (response) {
         // store user details and jwt token in local storage to keep user logged in between page refreshes
-        this.storageService.currentUser = response.code;
+        this.storageService.currentUser = response.store.code;
         this.storageService.userType = 'Store';
         this.blockUI.stop();
         this.messageService.sendMessage('Store Logged in');

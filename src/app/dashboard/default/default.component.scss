@@ -8,9 +8,11 @@
 
 .controls {
   display: inline-flex;
+  flex-wrap: wrap;
 
   .buttonDiv {
     margin-left: 20px !important;
+    margin-bottom: 10px;
   }
 }
 
