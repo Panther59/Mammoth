@@ -64,7 +64,7 @@ export class DefaultComponent implements OnInit {
         'SalesReport_' +
         this.businessDate.getFullYear() +
         (this.businessDate.getMonth() + 1).toString(2) +
-        this.businessDate.getDate().toString(2));
+        this.businessDate.getDate().toString(2)) + '.xlsx';
       this.blockUI.stop();
     } catch (error) {
       this.blockUI.stop();

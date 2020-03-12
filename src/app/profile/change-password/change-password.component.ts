@@ -1,12 +1,11 @@
-import { BlockUI, NgBlockUI } from 'ng-block-ui';
 import { Component, OnInit } from '@angular/core';
-
+import { Router } from '@angular/router';
+import { BlockUI, NgBlockUI } from 'ng-block-ui';
+import { Store } from 'src/app/_models/store';
 import { AuthenticationService } from 'src/app/_services/authentication.service';
 import { MessageService } from 'src/app/_services/message.service';
 import { ReportsService } from 'src/app/_services/reports.service';
-import { Router } from '@angular/router';
 import { StorageService } from 'src/app/_services/storage.service';
-import { Store } from 'src/app/_models/store';
 
 @Component({
   selector: 'app-change-password',
@@ -51,7 +50,7 @@ export class ChangePasswordComponent implements OnInit {
         await this.authenticationService.changePassword(this.model).toPromise();
         this.blockUI.stop();
         await this.messageService.showMessage('Password Change', 'Password change was successful.');
-        this.router.navigate(['/dashboard']);
+        this.model = {};
       } else {
         this.model.storeId = undefined;
         await this.authenticationService.changePassword(this.model).toPromise();
