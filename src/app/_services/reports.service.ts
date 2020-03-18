@@ -3,16 +3,17 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { StoreSaleReport } from '../_models/storeSaleReport';
+import { BaseAPIService } from './baseAPI.service';
 import { MessageService } from './message.service';
 import { StorageService } from './storage.service';
 
 @Injectable()
-export class ReportsService {
-  baseUrl = 'https://mammothapi.azurewebsites.net/';
+export class ReportsService extends BaseAPIService  {
   constructor(
     private httpClient: HttpClient,
     private storageService: StorageService,
     private messageService: MessageService) {
+    super();
   }
 
   getReportsSummary(date: Date): Observable<Array<StoreSaleReport>> {

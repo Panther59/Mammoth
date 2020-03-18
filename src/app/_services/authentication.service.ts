@@ -10,14 +10,14 @@ import { catchError, map } from 'rxjs/operators';
 import { AuthRequest } from '../_models/authRequest';
 import { AuthResponse } from '../_models/authResponse';
 import * as AppGlobal from '../global';
+import { BaseAPIService } from './baseAPI.service';
 import { MessageService } from './message.service';
 import { StorageService } from './storage.service';
 
 @Injectable()
-export class AuthenticationService {
+export class AuthenticationService extends BaseAPIService {
   @BlockUI() blockUI: NgBlockUI;
   timedOut = false;
-  baseUrl = 'https://mammothapi.azurewebsites.net/';
   constructor(
     private httpClient: HttpClient,
     private storageService: StorageService,
@@ -25,6 +25,7 @@ export class AuthenticationService {
     private router: Router,
     private idle: Idle,
     private keepalive: Keepalive) {
+    super();
   }
 
   setupIdleMonitor() {

@@ -5,18 +5,19 @@ import { Observable } from 'rxjs';
 
 import { ProductSale } from '../_models/productSale';
 import { StoreSale } from '../_models/storeSale';
+import { BaseAPIService } from './baseAPI.service';
 import { MessageService } from './message.service';
 import { StorageService } from './storage.service';
 
 @Injectable()
-export class SalesService {
+export class SalesService extends BaseAPIService {
   @BlockUI() blockUI: NgBlockUI;
   timedOut = false;
-  baseUrl = 'https://mammothapi.azurewebsites.net/';
   constructor(
     private httpClient: HttpClient,
     private storageService: StorageService,
     private messageService: MessageService) {
+    super();
   }
 
   getProductSales(): Observable<Array<ProductSale>> {

@@ -3,7 +3,7 @@
         <h2>Login</h2>
         <form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-              <mat-form-field>
+              <mat-form-field appearance="outline">
                 <mat-label>Login Type</mat-label>
                 <mat-select name="loginType" [(ngModel)]="model.type" #loginType="ngModel" required>
                   <mat-option value="User">Supervisor</mat-option>
@@ -12,16 +12,18 @@
               </mat-form-field>
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
-                <mat-form-field>
-                    <input matInput name="username" [(ngModel)]="model.username" [placeholder]="model.type == 'Store'? 'Store' : 'Login Name'" #username="ngModel" required>
+                <mat-form-field appearance="outline">
+                <mat-label>{{model.type == 'Store'? 'Store' : 'Login Name'}}</mat-label>
+                <input matInput name="username" [(ngModel)]="model.username" [placeholder]="model.type == 'Store'? 'Store' : 'Login Name'" #username="ngModel" required>
                     <mat-error *ngIf="f.submitted && !username.valid">
                         Username is required
                     </mat-error>
                 </mat-form-field>
             </div>
             <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
-                <mat-form-field>
-                    <input type="password" name="password" matInput [(ngModel)]="model.password" placeholder="Password" #password="ngModel" required>
+                <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input type="password" name="password" matInput [(ngModel)]="model.password" placeholder="Password" #password="ngModel" required>
                     <mat-error *ngIf="f.submitted && !password.valid">
                         Password is required
                     </mat-error>

@@ -58,13 +58,13 @@ export class DefaultComponent implements OnInit {
   async downloadReport() {
     try {
       this.blockUI.start('Loading report');
+      const fileName = 'SalesReport_' +
+      this.businessDate.getFullYear() +
+      (this.businessDate.getMonth() + 1).toString(2) +
+      this.businessDate.getDate().toString(2) + '.xlsx';
       const response = await this.reportsService.downloadReport(this.businessDate).toPromise();
       FileSaver.saveAs(
-        response,
-        'SalesReport_' +
-        this.businessDate.getFullYear() +
-        (this.businessDate.getMonth() + 1).toString(2) +
-        this.businessDate.getDate().toString(2)) + '.xlsx';
+        response, fileName);
       this.blockUI.stop();
     } catch (error) {
       this.blockUI.stop();
